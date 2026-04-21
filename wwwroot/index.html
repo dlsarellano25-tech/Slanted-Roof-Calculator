@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slanted Roof Block Volume Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">RoofVolume</span>
+        </div>
+        <span class="tag">Pentahedral Slanted-Roof Block Solver</span>
+    </header>
+
+    <main class="container">
+        <section class="card intro">
+            <h1>Volume of a Slanted-Roof Block Solid</h1>
+            <p>
+                This calculator computes the volume of a
+                <strong>Pentahedral Slanted-Roof Block</strong> &mdash; a rectangular
+                prism base with an asymmetric slanted-roof wedge on top, where the
+                two opposite roof edges may have different heights.
+            </p>
+
+            <div class="figure">
+                <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" aria-label="Slanted roof block diagram">
+                    <defs>
+                        <linearGradient id="gFront" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#5fd39a"/>
+                            <stop offset="100%" stop-color="#1f8a4c"/>
+                        </linearGradient>
+                        <linearGradient id="gSide" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#1f8a4c"/>
+                            <stop offset="100%" stop-color="#0f5a30"/>
+                        </linearGradient>
+                        <linearGradient id="gRoof" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#a7f3c8"/>
+                            <stop offset="100%" stop-color="#5fd39a"/>
+                        </linearGradient>
+                    </defs>
+
+                    <polygon points="60,170 240,170 290,140 110,140" fill="url(#gSide)" opacity="0.9"/>
+                    <rect x="60" y="120" width="180" height="50" fill="url(#gFront)"/>
+                    <polygon points="240,170 240,120 290,90 290,140" fill="url(#gSide)"/>
+
+                    <polygon points="60,120 240,120 290,90 110,40" fill="url(#gRoof)"/>
+                    <polygon points="60,120 110,40 110,40 60,120" fill="#2fa869"/>
+                    <polygon points="240,120 290,90 290,90 240,120" fill="#2fa869"/>
+
+                    <text x="150" y="195" class="lbl">L (length)</text>
+                    <text x="295" y="120" class="lbl">W (width)</text>
+                    <text x="40" y="150" class="lbl">h_base</text>
+                    <text x="40" y="80" class="lbl">h&#8321;</text>
+                    <text x="295" y="60" class="lbl">h&#8322;</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Enter Dimensions</h2>
+            <form id="calc-form" class="grid">
+                <label>
+                    Length L
+                    <input type="number" id="length" step="any" min="0" required placeholder="e.g. 10" />
+                </label>
+                <label>
+                    Width W
+                    <input type="number" id="width" step="any" min="0" required placeholder="e.g. 6" />
+                </label>
+                <label>
+                    Base height h_base
+                    <input type="number" id="baseHeight" step="any" min="0" required placeholder="e.g. 4" />
+                </label>
+                <label>
+                    Roof height h&#8321; (front)
+                    <input type="number" id="roofHeight1" step="any" min="0" required placeholder="e.g. 3" />
+                </label>
+                <label>
+                    Roof height h&#8322; (back)
+                    <input type="number" id="roofHeight2" step="any" min="0" required placeholder="e.g. 1.5" />
+                </label>
+                <label>
+                    Unit
+                    <select id="unit">
+                        <option value="m">meters (m)</option>
+                        <option value="cm">centimeters (cm)</option>
+                        <option value="ft">feet (ft)</option>
+                        <option value="in">inches (in)</option>
+                    </select>
+                </label>
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Calculate Volume</button>
+                    <button type="reset" class="btn btn-ghost">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="result" class="card result hidden">
+            <h2>Result</h2>
+            <div class="result-grid">
+                <div>
+                    <span class="label">Base prism</span>
+                    <span class="value" id="r-base">&mdash;</span>
+                </div>
+                <div>
+                    <span class="label">Slanted roof</span>
+                    <span class="value" id="r-roof">&mdash;</span>
+                </div>
+                <div class="total">
+                    <span class="label">Total volume</span>
+                    <span class="value" id="r-total">&mdash;</span>
+                </div>
+            </div>
+            <p class="formula" id="r-formula"></p>
+        </section>
+
+        <section id="error" class="card error hidden">
+            <strong>Error:</strong> <span id="error-msg"></span>
+        </section>
+    </main>
+
+    <footer class="footer">
+        Built with HTML &amp; ASP.NET Core (.NET 10) &middot; RoofVolume
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
